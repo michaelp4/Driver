@@ -1,0 +1,31 @@
+<div ng-controller="viewDriversController" class="k-rtl centerize-all panel">
+    <h3 >מי יוצא היום?</h3>
+    <div kendo-grid k-data-source="currentDrivers"
+         k-columns="driversColumns"
+         k-selectable="true"
+         k-on-change="onGridSelected(data)"></div>
+
+    <div style="margin: 10px;text-align:right" ng-show="!isAdding">
+        <button class="btn btn-default btn-success" ng-click="isAdding = true"><span class="glyphicon glyphicon-plus"></span></button>
+        <!--<button class="btn btn-default btn-danger" ng-click="removeDriver()">הסר</button>-->
+    </div>
+    <form name="addingDriverForm" style="margin: 10px;text-align:right" ng-show="isAdding">
+        <!--<input name="driverName" kendo-auto-complete k-data-text-field="'Name'" k-data-value-field="'Id'"-->
+               <!--k-data-source="allDrivers" k-ng-model="addedDriver" required/>-->
+        <angucomplete placeholder="Select..." selectedobject="addedDriver" localdata="allDrivers" searchfields="Name"
+                      titlefield="Name" minlength="1" inputclass="form-control form-control-small" matchclass="highlight" />
+        <button class="btn btn-default btn-success" ng-click="addDriver()"
+                ng-disabled="addedDriver == undefiend || addingDriverForm.driverName.$pristine">הוסף</button>
+        <button class="btn btn-default btn-danger" ng-click="isAdding = false; addedDriverName = undefiend">בטל</button>
+    </form>
+    <div>
+        <input type="text" placeholder="לאן יוצאים?" class="form-control" ng-model="destination"/>
+        <button class="btn btn-default btn-success wereGone" ng-click="letsGo()">!יצאנו</button>
+    </div>
+    <div class="panel-footer" style="margin-top: 100px;text-align: right">
+        <a class="btn btn-default" href="#/addDriver" ng-show="isAdmin">הוסף נהג חדש</a>
+        <a class="btn btn-default" href="#/manageDrivers" ng-show="isAdmin">נהל נהגים</a>
+        <a class="btn btn-default" href="#/driversHistory">היסטוריית יציאות</a>
+        <button class="btn btn-default btn-warning" ng-click="findDriver()">מצא נהג</button>
+    </div>
+</div>

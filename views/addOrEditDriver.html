@@ -1,0 +1,23 @@
+<div class="centerize-all rtl-all" id="add-driver">
+    <h3>{{title}}</h3>
+    <div class="form-inline">
+        <label>שם:</label>
+        <input type="text" name="name" ng-model="currentDriver.Name"/>
+    </div>
+    <div class="form-inline">
+        <label>האם כשיר לנהיגה?</label>
+        <select class="form-control" ng-model="currentDriver.CanDrive">
+            <option selected value="true">כן</option>
+            <option value="false">לא</option>
+        </select>
+    </div>
+    <div class="form-inline">
+        <label>האם יש רכב?</label>
+        <select class="form-control" ng-model="currentDriver.HasCar">
+            <option selected value="true">כן</option>
+            <option value="false">לא</option>
+        </select>
+    </div>
+    <button ng-click="goBack()" class="btn btn-default">חזור</button>
+    <button ng-click="save()" class="btn btn-default btn-primary">שמור</button>
+</div>
