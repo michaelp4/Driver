@@ -102,8 +102,8 @@ angular.module('whoseTurnToDrive').controller('viewDriversController',['$rootSco
         };
         $scope.switchToDriverOrPassenger = function(id){
             backendOperationsService.changeCurrentDriver(id).then(function(){
-
-                $scope.selectedDriver.IsDriving = !$scope.selectedDriver.IsDriving;
+                var driverToSwitch = _.filter($scope.currentDrivers.data(),{Id:id})[0]
+                driverToSwitch.IsDriving = !driverToSwitch.IsDriving;
             });
         };
         $scope.findDriver = function(){
@@ -116,6 +116,10 @@ angular.module('whoseTurnToDrive').controller('viewDriversController',['$rootSco
             $location.path("/editDriver");
         };
         $scope.letsGo = function(){
+            if(_.some($scope.currentDrivers.data(),{IsDriving:true}) == false){
+                alert("צריך לבחור נהג!");
+                return;
+            }
             backendOperationsService.refreshCurrentDrivers($scope.destination).then(function(){
                 var clonedCurrentDrivers = _.clone($scope.currentDrivers.data());
                 _.each(clonedCurrentDrivers, function(driver){

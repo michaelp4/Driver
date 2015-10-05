@@ -3,6 +3,10 @@ angular.module('whoseTurnToDrive').controller('manageDriversController', ['$root
         $scope.title = "נהל נהגים";
         $scope.driversColumns = [
             {
+                title:"מזהה",
+                field:"Id",
+                width:6
+            },{
                 title:"שם",
                 field:"Name"
             },
